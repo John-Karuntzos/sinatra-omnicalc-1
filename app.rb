@@ -22,6 +22,19 @@ end
 
 get("/:calc/results") do
   @type = params.fetch("calc")
-  @input = params.fetch("input")
-  erb(:results)
+
+  if(@type == "square")
+    @input = params.fetch("input").to_i
+    @out = (@input * @input).to_f
+    erb(:square_results)
+  elsif(@type == "square_root")
+    @input = params.fetch("input").to_i
+    @out = Math.sqrt(@input)
+    erb(:square_root_results)
+  elsif(@type == "random")
+    erb(:random_results)
+  elsif(@type == "payment")
+    erb(:payment_results)
+  end
+  
 end
