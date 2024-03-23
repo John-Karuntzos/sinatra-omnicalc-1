@@ -2,9 +2,7 @@ require "sinatra"
 require "sinatra/reloader"
 
 get("/") do
-  
   erb(:new)
-
 end
 
 get("/:calc/new") do
@@ -37,6 +35,11 @@ get("/:calc/results") do
     @out = rand((@min)..(@max))
     erb(:random_results)
   elsif(@type == "payment")
+    @apr = (params.fetch("apr").to_f / 100)
+    mpr = @apr / 12
+    @years = params.fetch("years").to_i * 12
+    @principal = params.fetch("principal").to_f
+    @out = (@principal * mpr) / (1 - ((1 + mpr) ** (@years * -1.0)))
     erb(:payment_results)
   end
   
