@@ -32,6 +32,9 @@ get("/:calc/results") do
     @out = Math.sqrt(@input)
     erb(:square_root_results)
   elsif(@type == "random")
+    @min = params.fetch("minimum").to_f
+    @max = params.fetch("maximum").to_f
+    @out = rand((@min)..(@max))
     erb(:random_results)
   elsif(@type == "payment")
     erb(:payment_results)
